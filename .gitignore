@@ -1,3 +1,5 @@
 loginCredentials.txt
 targetCRN.txt
 dropCRN.txt
+bin/*
+obj/*
