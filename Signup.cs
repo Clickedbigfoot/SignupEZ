@@ -4,6 +4,9 @@ Checks whether or not there is a spot open and signs up the user automatically i
 Drops any course necessary as specified by the user.
 */
 
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+
 namespace SignupEZ {
 
 	class Signup {
@@ -18,6 +21,10 @@ namespace SignupEZ {
 			password = inputPassword;
 			targets = inputTargets;
 			drops = inputDrops;
+
+			FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("src", "geckodriver");
+
+			//IWebDriver driver = new FirefoxDriver(null);
 		}
 
 		/*
