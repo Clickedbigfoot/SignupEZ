@@ -15,6 +15,8 @@ namespace SignupEZ {
 		string password;
 		string[] targets;
 		string[] drops;
+		FirefoxDriver driver;
+		readonly int SLEEP_TIME = 10 * 1000; //n * 1000 == n seconds of time to wait inbetween tasks
 
 		public  Signup(string inputNetID, string inputPassword, string[] inputTargets, string[] inputDrops) {
 			netID = inputNetID;
@@ -23,8 +25,10 @@ namespace SignupEZ {
 			drops = inputDrops;
 
 			FirefoxDriverService service = FirefoxDriverService.CreateDefaultService("src", "geckodriver");
-
-			//IWebDriver driver = new FirefoxDriver(null);
+			driver = new FirefoxDriver(service);
+			System.Threading.Thread.Sleep(SLEEP_TIME);
+			System.Console.WriteLine("Done!");
+			driver.Close();
 		}
 
 		/*
