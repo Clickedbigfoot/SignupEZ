@@ -4,6 +4,7 @@ Checks whether or not there is a spot open and signs up the user automatically i
 Drops any course necessary as specified by the user.
 */
 
+using System.Windows.Forms //Web browsing
 
 namespace SignupEZ {
 
@@ -19,6 +20,17 @@ namespace SignupEZ {
 			password = inputPassword;
 			targets = inputTargets;
 			drops = inputDrops;
+		}
+
+		/*
+		Attempts to log into the course registration site
+		@return 1 if successful
+		*/
+		public int getLoggedIn() {
+			
+
+
+			return 1;
 		}
 	}
 
