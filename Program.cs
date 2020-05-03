@@ -36,7 +36,7 @@ namespace SignupEZ
             	return;
             }
 
-            Signup test = new Signup();
+            Signup test = new Signup(credentials[0], credentials[1], targets, drops);
             
         }
     }

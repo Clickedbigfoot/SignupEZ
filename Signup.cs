@@ -8,8 +8,17 @@ Drops any course necessary as specified by the user.
 namespace SignupEZ {
 
 	class Signup {
-		public void test() {
-			System.Console.WriteLine("Class importing worked!");
+
+		string netID;
+		string password;
+		string[] targets;
+		string[] drops;
+
+		public  Signup(string inputNetID, string inputPassword, string[] inputTargets, string[] inputDrops) {
+			netID = inputNetID;
+			password = inputPassword;
+			targets = inputTargets;
+			drops = inputDrops;
 		}
 	}
 
