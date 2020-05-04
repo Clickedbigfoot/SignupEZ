@@ -36,7 +36,27 @@ namespace SignupEZ
             	return;
             }
 
-            Signup test = new Signup(credentials[0], credentials[1], targets, drops);
+            Signup signup = new Signup(credentials[0], credentials[1], targets, drops);
+            signup.getLoggedIn();
+            bool isSuccessful = false;
+            int iterations = 1;
+            while (!isSuccessful) {
+            	if (iterations % 21 == 0) {
+            		//This is the ~21st iteration
+            		signup.refresh();
+            	}
+
+            	System.Console.WriteLine("This is iteration " + iterations);
+            	System.Console.WriteLine(System.DateTime.Now);
+            	//Perform check here
+
+            	if (isSuccessful || iterations >= 50) {
+            		//Success!
+            		signup.finish();
+            		break;
+            	}
+            	iterations++;
+            }
             
         }
     }
