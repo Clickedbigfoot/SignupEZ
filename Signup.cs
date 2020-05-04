@@ -46,8 +46,17 @@ namespace SignupEZ {
 				System.Threading.Thread.Sleep(LARGE_SLEEP_TIME); //Should be at screen for selecting course registration
 			}
 
-			System.Console.WriteLine("Setup complete");
+			driver.Navigate().GoToUrl("https://banner.apps.uillinois.edu/StudentRegistrationSSB/?mepCode=1UIUC");
+			System.Threading.Thread.Sleep(SLEEP_TIME); //At screen to click "Register for Classes"
+			driver.FindElementById("registerLink").Click();
 			System.Threading.Thread.Sleep(SLEEP_TIME);
+			driver.FindElementByClassName("select2-choice").Click();
+			System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+			driver.FindElementById("120208").Click();
+			System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+			driver.FindElementById("term-go").Click();
+			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME); //At screen for picking classes now
+			System.Console.WriteLine("Setup complete");
 		}
 
 		/*
