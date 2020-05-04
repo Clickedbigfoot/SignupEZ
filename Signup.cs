@@ -22,6 +22,13 @@ namespace SignupEZ {
 		readonly int SLEEP_TIME = 5 * 1000;
 		readonly int SMALL_SLEEP_TIME = 2 * 1000;
 
+		/*
+		Constructor that initilaizes final variables
+		@param inputNetId: the netId
+		@param inputPassword: the user's password
+		@param inputTargets: array of CRNs for the target classes
+		@param inputDrops: array of CRNs for the classes to drop in order to make room in the schedule
+		*/
 		public  Signup(string inputNetId, string inputPassword, string[] inputTargets, string[] inputDrops) {
 			netId = inputNetId;
 			password = inputPassword;
@@ -57,6 +64,15 @@ namespace SignupEZ {
 			driver.FindElementById("term-go").Click();
 			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME); //At screen for picking classes now
 			System.Console.WriteLine("Setup complete");
+		}
+
+		/*
+		Checks to see if all the target classes are available, then drops necessary classes and signs up
+		@return true if classes were signed up for, false otherwise
+		*/
+		public bool performSuccess() {
+			System.Console.WriteLine("Nothing interesting happens");
+			return false; //HINT: use IWebElement methods or properties to aid the check
 		}
 
 		/*
