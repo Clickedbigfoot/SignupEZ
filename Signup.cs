@@ -67,21 +67,30 @@ namespace SignupEZ {
 		}
 
 		/*
-		Checks to see if all the target classes are available, then drops necessary classes and signs up
+		Signs up for the classes and drops classes as necessary
 		@return true if classes were signed up for, false otherwise
 		*/
-		public bool performSuccess() {
+		public bool performSignup() {
 			System.Console.WriteLine("Nothing interesting happens");
 			return false; //HINT: use IWebElement methods or properties to aid the check
+		}
+
+		/*
+		Checks to see if there is a spot in the classes
+		@return true if there is a spot in each target class, false otherwise
+		*/
+		public bool isAvailable() {
+			System.Console.WriteLine("Nothing interesting happens");
+			return false;
 		}
 
 		/*
 		Closes the web browser and sets it up again
 		*/
 		public void refresh() {
-			this.finish();
+			finish();
 			System.Threading.Thread.Sleep(SLEEP_TIME);
-			this.getLoggedIn();
+			getLoggedIn();
 		}
 
 		/*
