@@ -17,7 +17,7 @@ namespace SignupEZ
     	readonly static string DROP_CLASSES_LOCATION = "dropCRN.txt";
     	readonly static string errorCredentials = @"Error: Ensure your netID is in line one of loginCredentials.txt and your password is in line two";
     	readonly static string errorTargetCRN = @"Error: Ensure there is the name of the class and at least one CRN in targetCRN.txt";
-
+        readonly static int WAIT_TIME = 35 * 1000; //Wait 35 seconds inbetween every check performed
 
         static void Main(string[] args)
         {
@@ -45,6 +45,7 @@ namespace SignupEZ
             		signup.refresh();
             	}
 
+                System.Threading.Thread.Sleep(WAIT_TIME);
             	System.Console.WriteLine("This is iteration " + iterations);
             	System.Console.WriteLine(System.DateTime.Now);
             	isSuccessful = signup.performSignup(); //Checking and signing up if able

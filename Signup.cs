@@ -6,7 +6,6 @@ Drops any course necessary as specified by the user.
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-//using OpenQA.Selenium.Support.UI;
 
 namespace SignupEZ {
 

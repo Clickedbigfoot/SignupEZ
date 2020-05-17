@@ -3,3 +3,5 @@ targetCRN.txt
 dropCRN.txt
 bin/
 obj/
+publish/
+Signup.pdb
