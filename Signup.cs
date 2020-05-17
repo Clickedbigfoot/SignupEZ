@@ -6,6 +6,7 @@ Drops any course necessary as specified by the user.
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+//using OpenQA.Selenium.Support.UI;
 
 namespace SignupEZ {
 
@@ -13,20 +14,22 @@ namespace SignupEZ {
 
 		string netId;
 		string password;
-		string[] targets;
+		string[] targets; //targets[0] is the name of the class, targets[i > 0] are the CRNs to check
 		string[] drops;
 		FirefoxDriver driver;
 		FirefoxDriverService service;
 		IWebElement element1;
+		//SelectElement dropdown; //For dropdown menus in picking the results per page
 		readonly int LARGE_SLEEP_TIME = 10 * 1000; //n * 1000 == n seconds of time to wait inbetween tasks
 		readonly int SLEEP_TIME = 5 * 1000;
 		readonly int SMALL_SLEEP_TIME = 2 * 1000;
+		int i = 0; //Generic for loop
 
 		/*
 		Constructor that initilaizes final variables
 		@param inputNetId: the netId
 		@param inputPassword: the user's password
-		@param inputTargets: array of CRNs for the target classes
+		@param inputTargets: array of names and CRNs for the target classes
 		@param inputDrops: array of CRNs for the classes to drop in order to make room in the schedule
 		*/
 		public  Signup(string inputNetId, string inputPassword, string[] inputTargets, string[] inputDrops) {
@@ -63,6 +66,10 @@ namespace SignupEZ {
 			System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
 			driver.FindElementById("term-go").Click();
 			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME); //At screen for picking classes now
+			driver.FindElementById("txt_courseTitle").SendKeys(targets[0]);
+			System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+			driver.FindElementById("search-go").Click(); //At screen with list of desired classes now
+			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME);
 			System.Console.WriteLine("Setup complete");
 		}
 
@@ -72,7 +79,38 @@ namespace SignupEZ {
 		*/
 		public bool performSignup() {
 			System.Console.WriteLine("Nothing interesting happens");
-			return false; //HINT: use IWebElement methods or properties to aid the check
+			driver.FindElementById("search-again-button").Click(); //At search screen for classes
+			System.Threading.Thread.Sleep(SLEEP_TIME);
+			for (i = 0; i < 30; i++) {
+				//Backspace 30 times
+				driver.FindElementById("txt_courseTitle").SendKeys(Keys.Backspace);
+			}
+			driver.FindElementById("txt_courseTitle").SendKeys(targets[0]);
+			System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+			driver.FindElementById("search-go").Click(); //At screen with list of desired classes now
+			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME);
+			driver.FindElementByClassName("page-size-select").SendKeys("50" + Keys.Enter); //Set 50 results per page
+			System.Threading.Thread.Sleep(LARGE_SLEEP_TIME);
+			if (isAvailable()) {
+				//The classes have spots open!
+				System.Console.WriteLine("All spots open, attempting signup");
+				for (i = 1; i < targets.Length; i++) {
+					//Iterate through indeces of targets CRNs
+					driver.FindElementById("addSection120208" + targets[i]).Click();
+					System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+				}
+				for (i = 0; i < drops.Length; i++) {
+					//Iterate through indeces of CRNs to drop
+					driver.FindElementById("s2id_action-" + drops[i] + "-ddl").Click();
+					System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+					driver.FindElementById("DW").Click();
+					System.Threading.Thread.Sleep(SMALL_SLEEP_TIME);
+				}
+				driver.FindElementById("saveButton").Click();
+				System.Threading.Thread.Sleep(SLEEP_TIME);
+				return true;
+			}
+			return false;
 		}
 
 		/*
@@ -80,8 +118,14 @@ namespace SignupEZ {
 		@return true if there is a spot in each target class, false otherwise
 		*/
 		public bool isAvailable() {
-			System.Console.WriteLine("Nothing interesting happens");
-			return false;
+			for (i = 1; i < targets.Length; i++) {
+				//Iterate through the indeces of targets corresponding to CRNs
+				if (!driver.FindElementById("addSection120208" + targets[i]).Enabled) {
+					//The class is full 37431
+					return false;
+				}
+			}
+			return true;
 		}
 
 		/*
