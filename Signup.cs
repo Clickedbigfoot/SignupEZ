@@ -42,7 +42,12 @@ namespace SignupEZ {
 		Logs into the course registration site
 		*/
 		public void getLoggedIn() {
-			service = FirefoxDriverService.CreateDefaultService("src", "geckodriver");
+			try {
+				service = FirefoxDriverService.CreateDefaultService("src", "geckodriver");
+			}
+			catch (System.Exception e) {
+				service = FirefoxDriverService.CreateDefaultService("src", "geckodriver.exe");
+			}
 			driver = new FirefoxDriver(service);
 			driver.Navigate().GoToUrl("https://webprod.admin.uillinois.edu/ssa/servlet/SelfServiceLogin?appName=edu.uillinois.aits.SelfServiceLogin&dad=BANPROD1&target=G");
 			System.Threading.Thread.Sleep(SLEEP_TIME); //Now at login screen

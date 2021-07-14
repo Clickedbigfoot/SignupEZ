@@ -1,11 +1,11 @@
 # SchoolSignup
 
-Description: This program will constantly check to see if there are spots open in a class youa re trying to get into. Upon seeing that there are available seats, it will sign you up for the class while dropping any classes necessary to make room in the schedule. In past experience, this generally signs up for the course before Coursicle even detects a spot is open, but I would obviously still recommend using Coursicle as a backup method. Best left running on a computer not being used for extended periods. 
+Description: This program will constantly check to see if there are spots open in a class you are trying to get into. Upon seeing that there are available seats, it will sign you up for the class while dropping any classes necessary to make room in the schedule. In past experience, this generally signs up for the course before Coursicle even detects a spot is open, but I would obviously still recommend using Coursicle as a backup method. Best left running on a computer not being used for extended periods. 
 
 Setup:
 1) Requires firefox installed. 
-2) Requires the installation of geckodriver with the (or a copy of) the geckodriver executable in the src folder.
-3) In the same folder as the executable, it requires an src folder and three text files: loginCredentials.txt, targetCRN.txt, and dropCRN.txt.
+2) Requires the download of geckodriver, which must be saved in the src folder. Geckodriver can be downloaded from https://github.com/mozilla/geckodriver/releases
+3) In the same folder as the SignupEZ executable, there must be an src folder and three text files: loginCredentials.txt, targetCRN.txt, and dropCRN.txt.
 
 Instructions:
 1) In the targetCRN.txt file, write the exact name of the course you wish to sign up for on line one.
